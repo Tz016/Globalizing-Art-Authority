@@ -1,0 +1,421 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', Arial, sans-serif;
+  overflow: hidden;
+  background-color: #f9f9f9;
+}
+
+/* Splash screen */
+#splash-screen {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: #1a1a2e;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 1s ease-out;
+}
+
+#splash-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 1rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1.5s forwards 0.5s;
+}
+
+#splash-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1.5s forwards 1s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#splash-animation {
+  width: 100%;
+  height: 50vh;
+}
+
+#container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+#map-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+#p5-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.control-panel {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  z-index: 1000;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.control-panel:hover {
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  cursor: move;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.panel-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.panel-icon {
+  color: #666;
+  padding: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.panel-icon:hover {
+  color: #000;
+}
+
+.info-panel {
+  top: 20px;
+  right: 20px;
+  width: 320px;
+  max-height: 80vh;
+  overflow-y: auto;
+  display: none;
+}
+
+.museum-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #1a1a2e;
+}
+
+.museum-info {
+  line-height: 1.6;
+  color: #444;
+}
+
+.museum-info a {
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.museum-info a:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+.timeline-control {
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 20px;
+  text-align: center;
+  width: 400px;
+}
+
+.drag-handle {
+  cursor: move;
+  margin-bottom: 5px;
+  color: #888;
+  font-size: 14px;
+}
+
+.time-display {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 10px 0;
+  color: #1a1a2e;
+  transition: all 0.3s ease;
+}
+
+.timeline-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.timeline-slider {
+  flex-grow: 1;
+  margin: 0 10px;
+  -webkit-appearance: none;
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  outline: none;
+}
+
+.timeline-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #3498db;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.timeline-slider::-webkit-slider-thumb:hover {
+  background: #2980b9;
+  transform: scale(1.2);
+}
+
+button {
+  padding: 8px 12px;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background-color: #3498db;
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  margin: 0 5px;
+}
+
+button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+.reset-btn {
+  background-color: #e74c3c;
+}
+
+.reset-btn:hover {
+  background-color: #c0392b;
+}
+
+.legend-panel {
+  bottom: 30px;
+  left: 30px;
+  padding: 15px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #555;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.filter-panel {
+  top: 30px;
+  left: 30px;
+  padding: 15px;
+}
+
+.filter-item {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.filter-checkbox {
+  margin-right: 10px;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+label {
+  font-size: 14px;
+  color: #444;
+  cursor: pointer;
+}
+
+.event-notification {
+  position: fixed;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(26, 26, 46, 0.9);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  z-index: 2000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  max-width: 80%;
+  text-align: center;
+  font-size: 16px;
+}
+
+.timeline-events {
+  position: absolute;
+  bottom: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 800px;
+  height: 100px;
+  margin: 0 auto;
+  z-index: 500;
+}
+
+.recent-events {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 350px;
+  z-index: 900;
+  max-height: 80vh;
+  overflow-y: auto;
+  display: none;
+}
+
+.recent-event-item {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.recent-event-item:hover {
+  transform: translateX(5px);
+}
+
+.recent-event-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.event-year {
+  font-weight: 700;
+  color: #3498db;
+  margin-right: 5px;
+}
+
+.event-museum {
+  font-weight: 600;
+  color: #333;
+}
+
+.event-description {
+  margin-top: 5px;
+  color: #666;
+  font-size: 14px;
+}
+
+#year-display-large {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 200px;
+  color: rgba(0, 0, 0, 0.1);
+  font-weight: 700;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 30;
+  transition: opacity 0.5s ease;
+}
+
+.toggle-events-btn {
+  position: absolute;
+  top: 95px;
+  left: 30px;
+  z-index: 1000;
+  background-color: #3498db;
+  border-radius: 50px;
+  padding: 8px 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.toggle-events-btn:hover {
+  background-color: #2980b9;
+}
+
+.museum-marker div {
+  transition: all 0.3s ease;
+}
+
+.museum-marker div:hover {
+  transform: scale(1.3);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+canvas {
+  cursor: default;
+}
+
+/* 适配较小屏幕的响应式设计 */
+@media (max-width: 768px) {
+  .timeline-control {
+    width: 300px;
+    padding: 10px 15px;
+  }
+  
+  .info-panel, .recent-events {
+    width: 280px;
+  }
+  
+  #splash-title {
+    font-size: 2.5rem;
+  }
+  
+  #splash-subtitle {
+    font-size: 1.2rem;
+  }
+}

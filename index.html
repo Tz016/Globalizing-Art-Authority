@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Global Art Museum Timeline Visualization</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <script src="data.js" defer></script>
+  <script src="sketch.js" defer></script>
+</head>
+<body>
+  <!-- Splash Screen -->
+  <div id="splash-screen">
+    <h1 id="splash-title">Global Art Museums</h1>
+    <h2 id="splash-subtitle">An Interactive History & Timeline</h2>
+    <div id="splash-animation"></div>
+  </div>
+
+  <!-- Main Container -->
+  <div id="container">
+    <div id="map-container"></div>
+    <div id="p5-container"></div>
+    <div id="year-display-large"></div>
+  </div>
+
+  <!-- Museum Info Panel -->
+  <div class="control-panel info-panel" id="info-panel">
+    <div class="panel-header">
+      <h2 class="panel-title">Museum Information</h2>
+      <div class="panel-icon"><i class="fas fa-times" id="close-info"></i></div>
+    </div>
+    <h1 class="museum-name" id="museum-name">Museum Information</h1>
+    <div class="museum-info" id="museum-info"></div>
+  </div>
+
+  <!-- Timeline Control -->
+  <div class="control-panel timeline-control" id="timeline-control">
+    <div class="panel-header">
+      <h2 class="panel-title">Timeline Controls</h2>
+      <div class="drag-handle"><i class="fas fa-grip-horizontal"></i></div>
+    </div>
+    <div class="time-display" id="time-display">1700</div>
+    <div class="timeline-controls">
+      <button id="play-pause"><i class="fas fa-play"></i> Play</button>
+      <input type="range" class="timeline-slider" id="timeline-slider" min="1700" max="2025" value="1700">
+      <button class="reset-btn" id="reset"><i class="fas fa-undo-alt"></i> Reset</button>
+    </div>
+  </div>
+
+  <!-- Legend Panel -->
+  <div class="control-panel legend-panel" id="legend-panel">
+    <div class="panel-header">
+      <h2 class="panel-title">Legend</h2>
+      <div class="drag-handle"><i class="fas fa-grip-horizontal"></i></div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #e74c3c;"></div>Europe
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #3498db;"></div>North America
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #2ecc71;"></div>Asia
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #f39c12;"></div>Other Regions
+    </div>
+  </div>
+
+  <!-- Region Filter Panel -->
+  <div class="control-panel filter-panel" id="filter-panel">
+    <div class="panel-header">
+      <h2 class="panel-title">Filter Regions</h2>
+      <div class="drag-handle"><i class="fas fa-grip-horizontal"></i></div>
+    </div>
+    <div class="filter-item">
+      <input type="checkbox" id="toggle-europe" class="filter-checkbox" checked>
+      <label for="toggle-europe">Show Europe</label>
+    </div>
+    <div class="filter-item">
+      <input type="checkbox" id="toggle-namerica" class="filter-checkbox" checked>
+      <label for="toggle-namerica">Show North America</label>
+    </div>
+    <div class="filter-item">
+      <input type="checkbox" id="toggle-asia" class="filter-checkbox" checked>
+      <label for="toggle-asia">Show Asia</label>
+    </div>
+    <div class="filter-item">
+      <input type="checkbox" id="toggle-other" class="filter-checkbox" checked>
+      <label for="toggle-other">Show Other Regions</label>
+    </div>
+  </div>
+
+  <!-- Recent Events Panel -->
+  <div class="control-panel recent-events" id="recent-events">
+    <div class="panel-header">
+      <h2 class="panel-title">Recent Events</h2>
+      <div class="panel-icon"><i class="fas fa-times" id="close-events"></i></div>
+    </div>
+    <div id="recent-events-list"></div>
+  </div>
+
+  <!-- Event Notification -->
+  <div class="event-notification" id="event-notification"></div>
+
+  <!-- Events Toggle Button -->
+  <button id="toggle-events-btn" class="toggle-events-btn">
+    <i class="fas fa-history"></i> Show Events
+  </button>
+</body>
+</html>
