@@ -312,11 +312,11 @@ function drawTimelineTrack(museumEvents) {
     
     // 获取事件颜色
     let colorVal;
-    if (event.country === 'UK' || event.country === 'France' || event.country.includes('Europe')) {
+    if (event.country === 'UK' || event.country === 'France' || event.country === 'Russia' ||event.country === 'Vatian City' ||event.country.includes('Europe')) {
       colorVal = color(0, 80, 80); // 欧洲 - 红色
     } else if (event.country === 'USA' || event.country === 'Canada') {
       colorVal = color(210, 80, 80); // 北美 - 蓝色
-    } else if (event.country === 'Japan' || event.country === 'China' || event.country.includes('Asia')) {
+    } else if (event.country === 'Japan' || event.country === 'China' ||event.country === 'South Korea' || event.country.includes('Asia')) {
       colorVal = color(120, 80, 80); // 亚洲 - 绿色
     } else {
       colorVal = color(40, 80, 80); // 其他 - 橙色
